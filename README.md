@@ -113,12 +113,4 @@ office_erp/
     └── package.json
 ```
 
-## Resume-worthy highlights
 
-- JWT authentication with automatic access-token refresh on 401
-- Role-based access control enforced at the API layer (object + view level permissions)
-- RESTful API design with DRF ViewSets, routers, filtering, search, and pagination
-- React Context for auth state, React Router for protected routes
-- Recharts-powered dashboard analytics
-- Clean separation of Django apps mirroring real ERP domains — easy to extend
-"# ERP" 
