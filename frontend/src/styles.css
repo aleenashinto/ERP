@@ -1,0 +1,221 @@
+/* ============ Design tokens ============
+   Palette: Deep Slate (nav) / Canvas (page bg) / Ink (text) /
+            Signal Amber (primary action) / Sage (approved/positive) / Coral (alerts/late)
+   Type: Space Grotesk for headings & the ID-badge signature, Inter for body & data.
+   Signature element: employee "ID badge" chip (notch + monospace ID) used for every
+   person reference across the app, evoking a physical office badge.
+================================================ */
+:root {
+  --slate: #1C2430;
+  --slate-soft: #2A3341;
+  --canvas: #F5F6F4;
+  --card: #FFFFFF;
+  --ink: #1A1D23;
+  --ink-soft: #5B6270;
+  --line: #E4E4E0;
+  --amber: #E8A33D;
+  --amber-deep: #C9812A;
+  --sage: #5C8A66;
+  --sage-bg: #E7F1E9;
+  --coral: #D9634C;
+  --coral-bg: #FBE9E5;
+  --slate-bg: #E9EBEE;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(28,36,48,0.06), 0 4px 12px rgba(28,36,48,0.04);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.01em;
+}
+
+a { color: inherit; text-decoration: none; }
+
+button, input, select, textarea { font-family: inherit; }
+
+/* ---------- App shell ---------- */
+.app-shell { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 232px;
+  flex-shrink: 0;
+  background: var(--slate);
+  color: #EDEFF3;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+}
+
+.sidebar-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  padding: 6px 10px 22px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-logo .dot { width: 9px; height: 9px; border-radius: 2px; background: var(--amber); display: inline-block; }
+
+.nav-link {
+  display: block;
+  padding: 9px 12px;
+  margin-bottom: 2px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #C7CCD6;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-link:hover { background: var(--slate-soft); color: #fff; }
+.nav-link.active { background: var(--slate-soft); color: #fff; font-weight: 600; border-left: 2px solid var(--amber); padding-left: 10px; }
+
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 12px;
+  font-size: 12px;
+  color: #8B92A3;
+}
+
+.main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+.topbar {
+  height: 60px;
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.page-content { padding: 24px 28px 40px; flex: 1; }
+
+/* ---------- ID Badge (signature element) ----------
+   Used everywhere a person is referenced: dashboard birthdays, employee lists,
+   leave requests, attendance. Notch at top mimics a physical lanyard badge. */
+.id-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 5px 10px 5px 6px;
+  position: relative;
+}
+
+.id-badge::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+}
+
+.id-badge .avatar {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  background: var(--slate-bg);
+  color: var(--slate);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 11px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.id-badge .name { font-size: 13px; font-weight: 600; line-height: 1.1; }
+.id-badge .meta { font-size: 11px; color: var(--ink-soft); font-family: 'Space Grotesk', monospace; letter-spacing: 0.02em; }
+
+/* ---------- Cards / grid ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+
+.stat-card { padding: 16px 18px; }
+.stat-card .label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+.stat-card .value { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; }
+
+.grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+
+/* ---------- Tables ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--line); }
+td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+
+/* ---------- Badges / pills ---------- */
+.pill { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+.pill-pending { background: #FCEFD9; color: var(--amber-deep); }
+.pill-approved { background: var(--sage-bg); color: var(--sage); }
+.pill-rejected, .pill-late { background: var(--coral-bg); color: var(--coral); }
+.pill-cancelled { background: var(--slate-bg); color: var(--ink-soft); }
+.pill-active { background: var(--sage-bg); color: var(--sage); }
+.pill-inactive { background: var(--slate-bg); color: var(--ink-soft); }
+
+/* ---------- Buttons / forms ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 8px; border: none;
+  font-size: 13.5px; font-weight: 600; cursor: pointer;
+  transition: transform 0.05s ease, background 0.15s ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--amber); color: #201404; }
+.btn-primary:hover { background: var(--amber-deep); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn-ghost:hover { background: var(--slate-bg); }
+.btn-danger { background: var(--coral-bg); color: var(--coral); }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+
+input, select, textarea {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+  font-size: 13.5px; background: var(--card); color: var(--ink);
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--amber); outline-offset: 1px; border-color: var(--amber); }
+label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); display: block; margin-bottom: 4px; }
+.field { margin-bottom: 14px; }
+
+/* ---------- Login ---------- */
+.login-wrap {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--slate);
+  background-image: radial-gradient(circle at 20% 20%, rgba(232,163,61,0.10), transparent 40%);
+}
+.login-card {
+  width: 360px; background: var(--card); border-radius: 14px; padding: 32px 30px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+.login-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; margin-bottom: 4px; display:flex; align-items:center; gap:8px; }
+.login-sub { font-size: 13px; color: var(--ink-soft); margin-bottom: 22px; }
+.error-text { color: var(--coral); font-size: 12.5px; margin-top: 8px; }
+.hint-text { font-size: 11.5px; color: var(--ink-soft); margin-top: 16px; line-height: 1.5; }
+
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.section-title { font-size: 15px; margin-bottom: 12px; }
+.muted { color: var(--ink-soft); }
+.mt-16 { margin-top: 16px; }
